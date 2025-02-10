@@ -1,6 +1,7 @@
 from flask import Flask, request, redirect
 from flask_sqlalchemy import SQLAlchemy
-from flask.templating import render_template
+from flask import render_template
+from flask import session
 
 
 app=Flask(__name__)
@@ -36,7 +37,7 @@ class tripdetails(db.Model):
 class dept_info(db.Model):
     id=db.Column(db.Integer,primary_key=True)
     first_name=db.Column(db.String(20),unique=False,nullable=False,foreign_key=True)
-    dept_name=db.Column(db.string(10),unique=False,nullable=False)
+    dept_name=db.Column(db.String(10),unique=False,nullable=False)
     def __repr__(self):
         return f"self.first_name,self.id,self.dept_name"
 
@@ -45,6 +46,4 @@ class dept_info(db.Model):
 
 
 if __name__=="__main__":
-    with app.app_context():
-        db.create_all()
     app.run()
